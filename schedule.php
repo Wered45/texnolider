@@ -1,5 +1,9 @@
 <?php
 include 'temp/headr.php';
+if(!isset($_SESSION['id_user']) && $_SESSION['role'] != 'Студент'){
+    header('Location: /');
+    exit;
+}
 $s = 'select id_student from students where id_user = '.$_SESSION['id_user'];
 $id_student = $conect->query($s)->fetch_assoc()['id_student'];
 
@@ -8,7 +12,8 @@ join StudentGroupsThrough on lessons.id_group = StudentGroupsThrough.id_group
 join courses on lessons.id_course = courses.id_course
 join teachers on lessons.id_teacher  = teachers.id_teacher 
 join users on users.id_user  = teachers.id_user 
-where StudentGroupsThrough.id_student = '.$id_student;
+join tepy_lesson on tepy_lesson.id_tepy_les   = lessons.id_tepy_les 
+where StudentGroupsThrough.id_student = '.$id_student. ' order by lessons.date_lesson desc';
 $student = $conect->query($sql);
 ?>
 <div>
@@ -37,19 +42,16 @@ $student = $conect->query($sql);
                 <th scope="row"><?=$row['name_cour']?></th>
                 <td><?=$row['audien']?></td>
                 <td><?=$row['date_lesson']?></td>
-                <td>лекция</td>
+                <td><?=$row['name_lesson']?></td>
                 <td><?=$row['fio']?></td>
                 <td>
-                    <a href="detailt_lesson.php?id_lesson=<?=$row['id_lesson']?>">Ссылка</a>
+                    <a href="<?=$row['link']?>">Ссылка</a>
                 </td>
             </tr>
             <?php }?>
         </tbody>
     </table>
     </div>
-<div class="d-flex justify-content-center align-items-center">
-    <a href="">Сылка на видео урок.</a>
-</div>
 </div>
 <?php
 include 'temp/footer.php';

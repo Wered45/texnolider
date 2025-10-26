@@ -37,10 +37,13 @@
                 }
                 if (isset($_SESSION['id_user']) && $_SESSION['role'] == 'Преподователь') {
                     echo '<li class="nav-item">
-                <a class="nav-link active text-dark" aria-current="page" href="schedule.php">Расписание</a>
+                <a class="nav-link active text-dark" aria-current="page" href="schedule_expose.php">Выстовить расписание</a>
                 </li>';
                 echo '<li class="nav-item">
-                <a class="nav-link active text-dark" aria-current="page" href="ocenka.php">Оценка</a>
+                <a class="nav-link active text-dark" aria-current="page" href="ocenka_expose.php">Поставить оценку</a>
+                </li>';
+                echo '<li class="nav-item">
+                <a class="nav-link active text-dark" aria-current="page" href="assignment_types.php">Создать работу</a>
                 </li>';
                 echo '<li class="ms-auto">
                     <a class="btn btn-dark text-warning" href="logout.php">Выход</a>

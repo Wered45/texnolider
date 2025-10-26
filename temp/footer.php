@@ -35,53 +35,64 @@
          </div>
     </div>
 </div>
+<div class="modal" tabindex="-1" id='modalUpdateSchedule'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Расписание</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="actions/update_schedule.php">
+            <input type="hidden" name="id_schedule" id='id_schedule'>
+            <div class="mb-3">
+                <label for="date_update" class="form-label">Введите дату</label>
+                <input type="datetime-local" class="form-control" name='date_update' id='date_update'>
+            </div>
+             <div class="mb-3">
+                <label for="kabinet_update" class="form-label">Введите кабинет</label>
+                <input type="number" name='kabinet_update' class="form-control" id="kabinet_update" >
+            </div>
+            <button type="submit" name="btn_update" class="btn btn-dark text-warning">Обновить</button>
+
+        </form>
+        
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" id='modalUpdateGrade'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Обновить оценку</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="actions/update_grade.php">
+            <input type="hidden" name="id_grades" id='id_grades'>
+           
+             <div class="mb-3">
+                <label for="kabinet_update" class="form-label">Введите оценку</label>
+                <input type="number" name='och' class="form-control" id="och" >
+            </div>
+            <button type="submit" name="btn_update" class="btn btn-dark text-warning">Обновить</button>
+
+        </form>
+        
+
+      </div>
+      
+    </div>
+  </div>
+</div>
     <script src="/js/bootstrap.bundle.min.js"></script>
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const slider = document.querySelector('.slider');
-    const slides = document.querySelectorAll('.slider-item');
-    const prevBtn = document.querySelector('.left .btn');
-    const nextBtn = document.querySelector('.right .btn');
-    
-    let currentIndex = 0;
-    const visibleSlides = 2;
-    
-    function updateSlider() {
-        slides.forEach((slide, index) => {
-            if (index >= currentIndex && index < currentIndex + visibleSlides) {
-                setTimeout(() => {
-                    slide.classList.add('active');
-                }, 50);
-            } else {
-                slide.classList.remove('active');
-            }
-        });
-    }
-    
-    function nextSlide() {
-        if (currentIndex < slides.length - visibleSlides) {
-            currentIndex++;
-        } else {
-            currentIndex = 0;
-        }
-        updateSlider();
-    }
-    
-    function prevSlide() {
-        if (currentIndex > 0) {
-            currentIndex--;
-        } else {
-            currentIndex = slides.length - visibleSlides;
-        }
-        updateSlider();
-    }
-    
-    nextBtn.addEventListener('click', nextSlide);
-    prevBtn.addEventListener('click', prevSlide);
-    
-    updateSlider();
-});
-</script>
+
+<script src='js/app.js'></script>
 
 </body>
 </html>
+
+

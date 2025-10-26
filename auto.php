@@ -3,25 +3,31 @@ include 'temp/headr.php';
 if (isset($_POST['auto'])) {
     $login = $_POST['login'];
     $password = $_POST['password'];
-
     $sql = 'select * from users join role on users.id_role = role.id_role
-    where login = "'.$login.'" and password = "'.$password.'"';
-    echo $sql;
+    where login = "'.$login.'"';
     $user = $conect->query($sql)->fetch_assoc();
 
-    if ($user) {
-        $_SESSION['role'] = $user['name_role'];
-        $_SESSION['id_user'] = $user['id_user'];
-        $_SESSION['name'] = $user['fio'];
+    if($user){
+        $hash_password = $user['password'];
+        if(password_verify($password,  $hash_password)){
+             $_SESSION['role'] = $user['name_role'];
+            $_SESSION['id_user'] = $user['id_user'];
+            $_SESSION['name'] = $user['fio'];
 
-        if ($user['id_role'] == 2) {
-            header('Location: schedule.php');
-            exit;
+            if ($user['id_role'] == 2) {
+                header('Location: schedule.php');
+                exit;
+            }else{
+                header('Location: schedule_expose.php');
+                exit;
+            }
         }else{
-            header('Location: schedule_expose.php');
-            exit;
+            echo 'Не верный пароль!';
         }
+    }else{
+        echo 'Не верный логин!';
     }
+
 }
 ?>
 <div class="container mt-4 mb-3 border border-warning border-3 rounded">
